@@ -1,0 +1,148 @@
+<div class="edit-form" (click)="cancel($event.target)" #formElement>
+  <form class="card" *ngIf="form" [formGroup]="form" (ngSubmit)="submit()">
+    <h2>Edit</h2>
+    <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+      {{ error }}
+    </div>
+    <div class="alert alert-info" *ngIf="message">
+      {{ message }}
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('login').invalid && form.get('login').touched
+      }"
+    >
+      <label for="login">Login:</label>
+      <input id="login" type="text" formControlName="login" />
+      <div
+        class="validation"
+        *ngIf="form.get('login').invalid && form.get('login').touched"
+      >
+        <small *ngIf="form.get('login').errors.required">
+          The login field cannot be empty!
+        </small>
+        <small *ngIf="form.get('login').errors.minlength">
+          The password has to be minimum
+          {{ form.get("login").errors.minlength.requiredLength }} characters
+          long!
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('name').invalid && form.get('name').touched
+      }"
+    >
+      <label for="name">Name:</label>
+      <input id="name" type="text" formControlName="name" />
+      <div
+        class="validation"
+        *ngIf="form.get('name').invalid && form.get('name').touched"
+      >
+        <small *ngIf="form.get('name').errors.required">
+          The name field cannot be empty!
+        </small>
+        <small *ngIf="form.get('name').errors.minlength">
+          The password has to be minimum
+          {{ form.get("name").errors.minlength.requiredLength }} characters
+          long!
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('email').invalid && form.get('email').touched
+      }"
+    >
+      <label for="email">Email:</label>
+      <input id="email" type="email" formControlName="email" />
+      <div
+        class="validation"
+        *ngIf="form.get('email').invalid && form.get('email').touched"
+      >
+        <small *ngIf="form.get('email').errors.required">
+          The email field cannot be empty!
+        </small>
+        <small *ngIf="form.get('email').errors.email">
+          Enter the correct password!
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid: form.get('password').invalid && form.get('password').touched
+      }"
+    >
+      <label for="password">Password:</label>
+      <input id="password" type="password" formControlName="password" />
+      <div
+        class="validation"
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+      >
+        <small *ngIf="form.get('password').errors.required">
+          The password field cannot be empty!
+        </small>
+        <small *ngIf="form.get('password').errors.minlength">
+          The password has to be minimum
+          {{ form.get("password").errors.minlength.requiredLength }} characters
+          long!
+        </small>
+        <small *ngIf="form.errors.doNotMatchPasswords">
+          Passwords must match!
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-control"
+      [ngClass]="{
+        invalid:
+          form.get('retryPassword').invalid && form.get('retryPassword').touched
+      }"
+    >
+      <label for="retryPassword">Repeat password:</label>
+      <input
+        id="retryPassword"
+        type="password"
+        formControlName="retryPassword"
+      />
+      <div
+        class="validation"
+        *ngIf="
+          form.get('retryPassword').invalid && form.get('retryPassword').touched
+        "
+      >
+        <small *ngIf="form.get('retryPassword').errors.required">
+          The repeat password field cannot be empty!
+        </small>
+        <small *ngIf="form.get('retryPassword').errors.minlength">
+          The password has to be minimum
+          {{ form.get("retryPassword").errors.minlength.requiredLength }}
+          characters long!
+        </small>
+        <small *ngIf="form.errors.doNotMatchPasswords">
+          Passwords must match!
+        </small>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="form.invalid || submitted"
+    >
+      Ok
+    </button>
+    <button
+      type="button"
+      class="btn btn-danger"
+      (click)="cancel($event.target)"
+      #cancelElement
+    >
+      Cancel
+    </button>
+  </form>
+</div>

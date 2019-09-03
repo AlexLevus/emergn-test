@@ -1,0 +1,66 @@
+<nav class="navbar main bg-primary">
+  <h1>
+    <a routerLink="/">Emergn</a>
+  </h1>
+</nav>
+<form class="card" [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Login</h2>
+  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+    {{ error }}
+  </div>
+  <div class="alert alert-info" *ngIf="message">
+    {{ message }}
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('email').invalid && form.get('email').touched
+    }"
+  >
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" />
+    <div
+      class="validation"
+      *ngIf="form.get('email').invalid && form.get('email').touched"
+    >
+      <small *ngIf="form.get('email').errors.required">
+        The email field cannot be empty!
+      </small>
+      <small *ngIf="form.get('email').errors.email">
+        Enter the correct email!
+      </small>
+    </div>
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('password').invalid && form.get('password').touched
+    }"
+  >
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password" />
+    <div
+      class="validation"
+      *ngIf="form.get('password').invalid && form.get('password').touched"
+    >
+      <small *ngIf="form.get('password').errors.required">
+        The password field cannot be empty!
+      </small>
+      <small *ngIf="form.get('password').errors.minlength">
+        The password has to be minimum
+        {{ form.get("password").errors.minlength.requiredLength }} characters
+        long!
+      </small>
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="form.invalid || submitted"
+  >
+    Login
+  </button>
+  <a [routerLink]="['/login', 'registration']">Registration</a>
+</form>
+
+<router-outlet></router-outlet>

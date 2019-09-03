@@ -1,0 +1,58 @@
+<nav class="navbar bg-primary">
+  <h1>
+    <a routerLink="/">Emergn Test</a>
+  </h1>
+  <ul *ngIf="auth.isAuthenticated()">
+    <li>
+      <a href="#" (click)="logout($event)">Logout</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container">
+  <div *ngIf="users.length; else loading">
+    <div class="form-control">
+      <input type="text" placeholder="Search user..." [(ngModel)]="searchStr" />
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Login</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let user of users | searchUsers: searchStr; let idx = index"
+        >
+          <td>{{ idx + 1 }}</td>
+          <td>{{ user.login }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <ng-container *ngIf="user.email === userEmail; else noAccess">
+            <td>{{ user.password }}</td>
+            <td>
+              <button
+                class="btn btn-link open"
+                [routerLink]="['/edit', user.id]"
+              >
+                Edit
+              </button>
+            </td>
+          </ng-container>
+          <ng-template #noAccess>
+            <td>********</td>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #loading>
+    <p class="text-center">Loading...</p>
+  </ng-template>
+</div>
+<router-outlet></router-outlet>
