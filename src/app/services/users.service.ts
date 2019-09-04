@@ -54,7 +54,9 @@ export class UsersService {
   }
 
   updateUser(user: UserUpdate): Observable<UserUpdate> {
-    localStorage.setItem("user-email", user.email);
+    if (user.email) {
+      localStorage.setItem("user-email", user.email);
+    }
     return this.http
       .post<UserUpdate>(
         `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,

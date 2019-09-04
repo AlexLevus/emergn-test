@@ -34,8 +34,8 @@ export class EditFormComponent implements OnInit, OnDestroy {
   uSub: Subscription;
 
   constructor(
-    public auth: AuthService,
-    private userService: UsersService,
+    private auth: AuthService,
+    public userService: UsersService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
