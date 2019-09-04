@@ -37,10 +37,12 @@ export class AuthService {
   }
 
   registr(user: User) {
-    return this.http.post(
-      `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`,
-      user
-    );
+    return this.http
+      .post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`,
+        user
+      )
+      .pipe(catchError(this.handleError.bind(this)));
   }
 
   isAuthenticated(): boolean {
@@ -51,14 +53,16 @@ export class AuthService {
     const { message } = error.error.error;
     switch (message) {
       case "INVALID_EMAIL":
-        this.error$.next("Неверный email");
+        this.error$.next("Invalid email");
         break;
       case "INVALID_PASSWORD":
-        this.error$.next("Неверный password");
+        this.error$.next("Invalid password");
         break;
       case "EMAIL_NOT_FOUND":
-        this.error$.next("Email не найден");
+        this.error$.next("Email not found");
         break;
+      case "EMAIL_EXISTS":
+        this.error$.next("Email already exists");
     }
     return throwError(error);
   }

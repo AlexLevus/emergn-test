@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Observable, Subject, throwError } from "rxjs";
 import { FbCreateResponse, UserInfo, UserUpdate } from "../interfaces";
 import { environment } from "../../environments/environment";
-import { map } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class UsersService {
+  public error$: Subject<string> = new Subject<string>();
   constructor(private http: HttpClient) {}
   create(user: UserInfo): Observable<UserInfo> {
     return this.http.post(`${environment.fbDbUrl}/users.json`, user).pipe(
@@ -53,9 +54,21 @@ export class UsersService {
   }
 
   updateUser(user: UserUpdate): Observable<UserUpdate> {
-    return this.http.post<UserUpdate>(
-      `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
-      user
-    );
+    localStorage.setItem("user-email", user.email);
+    return this.http
+      .post<UserUpdate>(
+        `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${environment.apiKey}`,
+        user
+      )
+      .pipe(catchError(this.handleError.bind(this)));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const { message } = error.error.error;
+    switch (message) {
+      case "EMAIL_EXISTS":
+        this.error$.next("Email already exists");
+    }
+    return throwError(error);
   }
 }

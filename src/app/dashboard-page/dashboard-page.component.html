@@ -29,23 +29,20 @@
         <tr
           *ngFor="let user of users | searchUsers: searchStr; let idx = index"
         >
-          <td>{{ idx + 1 }}</td>
-          <td>{{ user.login }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
+          <td aria-label="#">{{ idx + 1 }}</td>
+          <td aria-label="Login">{{ user.login }}</td>
+          <td aria-label="Name">{{ user.name }}</td>
+          <td aria-label="Email">{{ user.email }}</td>
           <ng-container *ngIf="user.email === userEmail; else noAccess">
-            <td>{{ user.password }}</td>
-            <td>
-              <button
-                class="btn btn-link open"
-                [routerLink]="['/edit', user.id]"
-              >
+            <td aria-label="Password">{{ user.password }}</td>
+            <td aria-label="Edit">
+              <button class="btn btn-link" [routerLink]="['/edit', user.id]">
                 Edit
               </button>
             </td>
           </ng-container>
           <ng-template #noAccess>
-            <td>********</td>
+            <td aria-label="Password">********</td>
           </ng-template>
         </tr>
       </tbody>

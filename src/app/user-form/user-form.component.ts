@@ -76,7 +76,6 @@ export class UserFormComponent implements OnInit {
         this.submitted = false;
       }
     );
-    this.form.reset();
   }
 
   cancel(e?: EventTarget) {

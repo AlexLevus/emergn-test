@@ -1,4 +1,4 @@
-<div class="form" (click)="cancel($event.target)" #formElement>
+<div class="user-form" (click)="cancel($event.target)" #formElement>
   <form class="card" [formGroup]="form" (ngSubmit)="submit()">
     <h2>Registration</h2>
     <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
@@ -91,7 +91,7 @@
           {{ form.get("password").errors.minlength.requiredLength }} characters
           long!
         </small>
-        <small *ngIf="form.errors.doNotMatchPasswords">
+        <small *ngIf="form.errors?.doNotMatchPasswords">
           Passwords must match!
         </small>
       </div>
@@ -123,7 +123,7 @@
           {{ form.get("retryPassword").errors.minlength.requiredLength }}
           characters long!
         </small>
-        <small *ngIf="form.errors.doNotMatchPasswords">
+        <small *ngIf="form.errors?.doNotMatchPasswords">
           Passwords must match!
         </small>
       </div>

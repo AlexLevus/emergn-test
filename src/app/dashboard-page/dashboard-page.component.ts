@@ -43,6 +43,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         takeUntil(this.destroyed)
       )
       .subscribe(() => {
+        this.userEmail = localStorage.getItem("user-email");
         this.usersService.getAll().subscribe(users => {
           this.users = users;
         });
