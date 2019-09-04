@@ -1,27 +1,30 @@
 # EmergnTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.2.
+Привет! Это мое тестовое задание для Emergn. 
+Клиентская часть здесь выполнена на Angular 8, серверная часть должна была быть сделана на Java, но с этим языком я никогда не работал, поэтому сделал эту часть с помощью REST API Firebase, хотя заданием это и не предусмотрено.
+
+Live-demo: https://emergn-test.web.app
+
+Данные для входа: test1@mail.ru, test2@mail.ru, test3@mail.ru, levis38@mail.ru. Пароль: 123456
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Для запуска приложения выполните команду `ng serve`. Затем перейдите по адресу `http://localhost:4200/`. 
+ сколько чистого времени вы потратили на выполнение задачи,
+сколько заняло изучение технологий,
+какие трудности возникали,
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+также необходимо написать краткое руководство как запустить приложение чтобы проверить его работоспособность.
 
-## Build
+## Сколько чистого времени вы потратили на выполнение задачи?
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Задание начал выполнять 30 августа (29 августа узнал, что задание еще можно отправить до 6 сентября). Итого 6 дней. В часах, думаю, около 18-20.
 
-## Running unit tests
+## Сколько заняло изучение технологий?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+До этого уже был немного знаком с Angular, поэтому изучение технологий много времени не заняло. Приходилось читать разные статьи, подходы к решению проблем. В течение 6 дней узнавал что-то новое.
 
-## Running end-to-end tests
+## Какие трудности возникали?
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+До этого никогда не работал с авторизацией и регистрацией пользователей, поэтому было немного трудно с этим разобраться. Много времени потратил на отладку, устранение ошибок.
